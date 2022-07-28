@@ -28,6 +28,7 @@ function addStudent(firstName, middleName, lastName, dateOfBirth, chidoan, nganh
     let studentDocRef = db.collection("students").doc(id);
 
     studentDocRef.set({
+        id: id,
         firstName: firstName,
         middleName: middleName,
         lastName: lastName,
@@ -47,7 +48,7 @@ function addStudent(firstName, middleName, lastName, dateOfBirth, chidoan, nganh
         notes: notes
     })
     .then((docRef) => {
-        alert("Successfully Registered Student with Id: ", id.toString());
+        alert("Successfully Registered Student with Id: " + id);
         console.log("Student added with ID: ", id);
     })
     .catch((error) => {
