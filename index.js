@@ -5,6 +5,7 @@ function registerStudent()
     let lastName = document.getElementById("lastName").value;
     let dateOfBirth = document.getElementById("dateOfBirth").value;
     let nganh = document.getElementById("nganh").value;
+    let chidoan = document.getElementById("chidoan").value;
     let gender = document.getElementById("gender").value;
     let fatherName = document.getElementById("fatherName").value;
     let fatherPhone = document.getElementById("fatherPhone").value;
@@ -17,10 +18,10 @@ function registerStudent()
     let paid = document.getElementById("paid").value;
     let notes = document.getElementById("notes").value;
 
-    addStudent(firstName, middleName, lastName, dateOfBirth, nganh, gender, fatherName, fatherPhone, fatherEmail, motherName, motherPhone, motherEmail, address, returningNew, paid, notes);
+    addStudent(firstName, middleName, lastName, dateOfBirth, chidoan, nganh, gender, fatherName, fatherPhone, fatherEmail, motherName, motherPhone, motherEmail, address, returningNew, paid, notes);
 }
 
-function addStudent(firstName, middleName, lastName, dateOfBirth, nganh, gender, fatherName, fatherPhone, fatherEmail, motherName, motherPhone, motherEmail, address, returningNew, paid, notes)
+function addStudent(firstName, middleName, lastName, dateOfBirth, chidoan, nganh, gender, fatherName, fatherPhone, fatherEmail, motherName, motherPhone, motherEmail, address, returningNew, paid, notes)
 {
     let id = studentId(firstName, lastName, fatherPhone, motherPhone);
 
@@ -31,6 +32,7 @@ function addStudent(firstName, middleName, lastName, dateOfBirth, nganh, gender,
         middleName: middleName,
         lastName: lastName,
         dateOfBirth: dateOfBirth,
+        chidoan: chidoan,
         nganh: nganh,
         gender: gender,
         fatherName: fatherName,
@@ -45,7 +47,7 @@ function addStudent(firstName, middleName, lastName, dateOfBirth, nganh, gender,
         notes: notes
     })
     .then((docRef) => {
-        alert("Successfully Registered Student with Id: ", id);
+        alert("Successfully Registered Student with Id: ", id.toString());
         console.log("Student added with ID: ", id);
     })
     .catch((error) => {

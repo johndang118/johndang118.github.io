@@ -20,7 +20,7 @@ let readStudents = (students, selectedNganh) =>
     let card = "";
     students.forEach((student) => {  
 
-        if (student.nganh == selectedNganh)
+        if (`${student.nganh}, ${student.chidoan}` == selectedNganh)
         {
             card = 
             `<li id="${student.id.toString()}" class="list-unstyled col-sm-12 col-md-3 col-lg-3" style="margin:auto">
