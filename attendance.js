@@ -25,7 +25,7 @@ let readStudents = (students, selectedNganh) =>
             card = 
             `<li id="${student.id.toString()}" class="list-unstyled col-sm-12 col-md-3 col-lg-3" style="margin:auto">
                 <div class="card">
-                    <img src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png" class="card-img-top" alt="..." style="max-height: 500px; margin-top:10px; padding-left:40px; padding-right:40px; overflow:hidden; border-radius:50%;">
+                    <img src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png" class="card-img-top" alt="..." style="max-height: 450px; margin-top:10px; padding-left:20px; padding-right:20px; overflow:hidden; border-radius:50%;">
                     <div class="card-body">
                         <h3 class="card-title">${student.firstName} ${student.lastName}</h3>
                         <p class="card-text">Nganh: <span style="float:right;">${student.nganh}</span></p>
