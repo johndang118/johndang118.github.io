@@ -34,6 +34,7 @@ function addStudent(firstName, middleName, lastName, dateOfBirth, chidoan, nganh
         lastName: lastName,
         dateOfBirth: dateOfBirth,
         chidoan: chidoan,
+        absences: 0,
         nganh: nganh,
         gender: gender,
         fatherName: fatherName,

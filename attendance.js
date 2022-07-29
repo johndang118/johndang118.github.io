@@ -28,7 +28,7 @@ let readStudents = (students, selectedNganh) =>
                     <img src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png" class="card-img-top" alt="..." style="max-height: 450px; margin-top:10px; padding-left:20px; padding-right:20px; overflow:hidden; border-radius:50%;">
                     <div class="card-body">
                         <h3 class="card-title">${student.firstName} ${student.lastName}</h3>
-                        <h4 class="card-text">Student Id: ${student.id}</h4>
+                        <h4 class="card-text">Id: ${student.id}</h4>
                         <p class="card-text">Nganh: <span style="float:right;">${student.nganh}, ${student.chidoan}</span></p>
                         
                     </div>
@@ -38,10 +38,11 @@ let readStudents = (students, selectedNganh) =>
                         <li class="list-group-item">Phone: <span style="float:right;">${student.fatherPhone}</span></li>
                         <li class="list-group-item">Notes: <span style="float:right;">${student.notes}</span></li>
                         <li class="list-group-item">Birthdate: <span style="float:right;">${student.dateOfBirth}</span></li>
+                        <li class="list-group-item">Total Absences: <span style="float:right;">${student.absences}</span></li>
                     </ul>
                     <div class="card-body">
                         <button class="btn btn-primary col-5 ms-auto px-0" onclick="presentBtnClick('${student.id.toString()}')">Present</button>
-                        <button class="btn btn-secondary col-5 ms-4 px-0" onclick="absentBtnClick('${student.id.toString()}')">Absent</button>
+                        <button class="btn btn-secondary col-5 ms-4 px-0" onclick="absentBtnClick('${student.id.toString()}', '${student.absences}')">Absent</button>
                     </div>
                 </div><br>
             </li>`
@@ -84,15 +85,33 @@ let presentBtnClick = (studentId) =>
     });
 }
 
-let absentBtnClick = (studentId) =>
+let absentBtnClick = (studentId, absences) =>
 {
+    let parseAbsences = parseInt(absences);
+
     var studentRef = db.collection("students").doc(studentId).collection("Attendance").doc(returnCurrentDateString());
+
+    let studentDocRef = db.collection("students");
+
+    studentDocRef.doc(studentId).set({
+       absences : parseAbsences + 1 
+    }, {merge : true})
+    .then((docRef) => {
+
+        console.log("Absence successfully Incremented! ", docRef);
+
+    })
+    .catch((error) => {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
 
     return studentRef.set({
         present: false
     }, {merge : true})
     .then(() => {
-        console.log("Document successfully updated!");
+
+        console.log("Absence successfully Logged!");
         let studentCard = document.getElementById(studentId);
         studentCard.setAttribute('hidden', '');
 
