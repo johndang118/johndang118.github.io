@@ -23,14 +23,14 @@ let readStudents = (students, selectedNganh) =>
         if (`${student.nganh}, ${student.chidoan}` == selectedNganh)
         {
             
-
+            const portraitFolderURL = 'https://github.com/johndang118/johndang118.github.io/blob/main/portraits/';
             card = 
             `<li id="${student.id.toString()}" class="list-unstyled col-sm-12 col-md-3 col-lg-3" style="margin:auto">
                 <div class="card">
                     <picture>
-                        <source alt="Special Days" srcset="/portraits/${(portraitExists(`${student.id}.jpg`) || portraitExists(`${student.id}.png`)) ?  student.id : 'placeholderimg'}.jpg">
-                        <source alt="Special Days" srcset="/portraits/${(portraitExists(`${student.id}.jpg`) || portraitExists(`${student.id}.png`)) ?  student.id : 'placeholderimg'}.png">                  
-                        <img src="./portraits/${(portraitExists(`${student.id}.jpg`) || portraitExists(`${student.id}.png`)) ?  student.id : 'placeholderimg'}.jpg" class="card-img-top" alt="picture of ${student.firstName}" style="max-height: 450px; margin-top:10px; padding-left:20px; padding-right:20px; overflow:hidden; border-radius:50%;">
+                        <source alt="Special Days" srcset="${portraitFolderURL}${(portraitExists(`${student.id}.JPG`) || portraitExists(`${student.id}.PNG`)) ?  student.id : 'placeholderimg'}.JPG?raw=true">
+                        <source alt="Special Days" srcset="${portraitFolderURL}${(portraitExists(`${student.id}.JPG`) || portraitExists(`${student.id}.PNG`)) ?  student.id : 'placeholderimg'}.PNG?raw=true">                  
+                        <img src="${(portraitExists(`${student.id}.JPG`) || portraitExists(`${student.id}.PNG`)) ?  student.id : 'placeholderimg'}.JPG?raw=true" class="card-img-top" alt="picture of ${student.firstName}" style="max-height: 450px; margin-top:10px; padding-left:20px; padding-right:20px; overflow:hidden; border-radius:50%;">
                     </picture>
                     <div class="card-body">
                         <h3 class="card-title">${student.firstName} ${student.lastName}</h3>
@@ -131,10 +131,10 @@ let absentBtnClick = (studentId, absences) =>
 //Check for portrait
 let portraitExists = (fileName) => {
     var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', `${document.URL}/portraits/${fileName}`, false);
+    xhr.open('HEAD', `https://github.com/johndang118/johndang118.github.io/blob/main/portraits/${fileName}?raw=true`, false);
     xhr.send();
      
-    if (xhr.status == "404") {
+    if (xhr.status == "404" || xhr.status != "200") {
         return false;
     } else {
         return true;
