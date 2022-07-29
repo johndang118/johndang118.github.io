@@ -22,15 +22,30 @@ let readStudents = (students, selectedNganh) =>
 
         if (`${student.nganh}, ${student.chidoan}` == selectedNganh)
         {
-            
+            let portraitBorderColor;
+
+            switch(student.nganh)
+            {
+                case 'Au Nhi' : portraitBorderColor = 'green' 
+                break;
+                case 'Thieu Nhi' : portraitBorderColor = 'blue' 
+                break;
+                case 'Nghia Si' : portraitBorderColor = 'yellow' 
+                break;
+                case 'Hiep Si' : portraitBorderColor = 'brown' 
+                break;
+
+                default: portraitBorderColor = 'red'
+            }
+
             const portraitFolderURL = 'https://github.com/johndang118/johndang118.github.io/blob/main/portraits/';
             card = 
             `<li id="${student.id.toString()}" class="list-unstyled col-sm-12 col-md-3 col-lg-3" style="margin:auto">
-                <div class="card">
+                <div class="card col-sm-12" style="margin-left:auto; text-align:center">
                     <picture>
                         <source alt="Special Days" srcset="${portraitFolderURL}placeholderimg.jpg?raw=true">
                         <source alt="Special Days" srcset="${portraitFolderURL}placeholderimg.png?raw=true">                  
-                        <img src="${portraitFolderURL}placeholderimg.jpg?raw=true" class="card-img-top" alt="picture of ${student.firstName}" style="max-height: 450px; margin-top:10px; padding-left:20px; padding-right:20px; overflow:hidden; border-radius:50%;">
+                        <img src="${portraitFolderURL}placeholderimg.jpg?raw=true" class="card-img-top mx-0=auto" alt="picture of ${student.firstName}" style="min-width:60%; max-width:60%; max-height: 500px; margin-left: auto; margin-top:10px;  overflow:hidden; border-width: 4px; border-style: solid; border-radius:50%; border-color: ${portraitBorderColor};">
                     </picture>
                     <div class="card-body">
                         <h3 class="card-title">${student.firstName} ${student.lastName}</h3>
