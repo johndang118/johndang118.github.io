@@ -19,6 +19,25 @@ function registerStudent()
     let notes = document.getElementById("notes").value;
 
     addStudent(firstName, middleName, lastName, dateOfBirth, chidoan, nganh, gender, fatherName, fatherPhone, fatherEmail, motherName, motherPhone, motherEmail, address, returningNew, paid, notes);
+
+    //clear field values
+    document.getElementById("firstName").value = '';
+    document.getElementById("middleName").value = '';
+    document.getElementById("lastName").value = '';
+    document.getElementById("dateOfBirth").value = '';
+    document.getElementById("nganh").value = '';
+    document.getElementById("chidoan").value = '';
+    document.getElementById("gender").value = '';
+    document.getElementById("fatherName").value = '';
+    document.getElementById("fatherPhone").value = '';
+    document.getElementById("fatherEmail").value = '';
+    document.getElementById("motherName").value = '';
+    document.getElementById("motherPhone").value = '';
+    document.getElementById("motherEmail").value = '';
+    document.getElementById("address").value = '';
+    document.getElementById("returningNew").value = '';
+    document.getElementById("paid").value = '';
+    document.getElementById("notes").value = '';
 }
 
 function addStudent(firstName, middleName, lastName, dateOfBirth, chidoan, nganh, gender, fatherName, fatherPhone, fatherEmail, motherName, motherPhone, motherEmail, address, returningNew, paid, notes)

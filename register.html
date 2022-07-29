@@ -18,9 +18,9 @@
     <div class="bg2"></div>
 
     <h1 style="text-align:center">Register</h1>
-
+    <br>
     <div class="row">
-        <form>
+        <form id="registerForm">
             <div class="form-row">
               <div class="col">
                 <input id="firstName" type="text" class="form-control" placeholder="First name" required="true">
@@ -34,16 +34,18 @@
                 <input id="lastName" type="text" class="form-control" placeholder="Last name" required="true">
               </div>
               <br>
-              <label for="dateOfBirth"><b>Date Of Birth:</b></label>
+              <label for="dateOfBirth"><b>Date of Birth:</b></label>
               <div class="col">
                 <input id="dateOfBirth" type="date" class="form-control" placeholder="Date of Birth">
               </div>
               <br>
+              <label for="gender"><b>Gender</b></label>
               <select id="gender" class="form-control">
                 <option>Male</option>
                 <option>Female</option>
               </select>
               <br>
+              <label for="nganh"><b>Nganh:</b></label>
               <select id="nganh" class="form-control">
                 <option>Au Nhi</option>
                 <option>Thieu Nhi</option>
@@ -51,6 +53,7 @@
                 <option>Hiep Si</option>
               </select>
               <br>
+              <label for="chidoan"><b>Chi Doan / Cap:</b></label>
               <select id="chidoan" class="form-control">
                 <option>Cap 1</option>
                 <option>Cap 2</option>
@@ -74,7 +77,7 @@
               </div>
               <br>
               <div class="col">
-                <input id="motherPhone" type="tel" class="form-control" placeholder="Mother's Phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"">
+                <input id="motherPhone" type="tel" class="form-control" placeholder="Mother's Phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
               </div>
               <br>
               <div class="col">
@@ -85,6 +88,7 @@
                 <input id="address" type="text" class="form-control" placeholder="Address">
               </div>
               <br>
+              <label for="returningNew"><b>Returning or New</b></label>
               <select id="returningNew" class="form-control">
                 <option>Returning</option>
                 <option>New</option>
