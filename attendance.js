@@ -131,7 +131,7 @@ let absentBtnClick = (studentId, absences) =>
 //Check for portrait
 let portraitExists = (fileName) => {
     var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', `https://github.com/johndang118/johndang118.github.io/blob/main/portraits/${fileName}`, false);
+    xhr.open('HEAD', `${document.URL}/portraits/${fileName}?raw=true`, false);
     xhr.send();
      
     if (xhr.status == "404") {
