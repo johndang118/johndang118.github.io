@@ -22,10 +22,16 @@ let readStudents = (students, selectedNganh) =>
 
         if (`${student.nganh}, ${student.chidoan}` == selectedNganh)
         {
+            
+
             card = 
             `<li id="${student.id.toString()}" class="list-unstyled col-sm-12 col-md-3 col-lg-3" style="margin:auto">
                 <div class="card">
-                    <img src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png" class="card-img-top" alt="..." style="max-height: 450px; margin-top:10px; padding-left:20px; padding-right:20px; overflow:hidden; border-radius:50%;">
+                    <picture>
+                        <source alt="Special Days" srcset="/portraits/${(portraitExists(`${student.id}.jpg`) || portraitExists(`${student.id}.png`)) ?  student.id : 'placeholderimg'}.jpg">
+                        <source alt="Special Days" srcset="/portraits/${(portraitExists(`${student.id}.jpg`) || portraitExists(`${student.id}.png`)) ?  student.id : 'placeholderimg'}.png">                  
+                        <img src="./portraits/${(portraitExists(`${student.id}.jpg`) || portraitExists(`${student.id}.png`)) ?  student.id : 'placeholderimg'}.jpg" class="card-img-top" alt="picture of ${student.firstName}" style="max-height: 450px; margin-top:10px; padding-left:20px; padding-right:20px; overflow:hidden; border-radius:50%;">
+                    </picture>
                     <div class="card-body">
                         <h3 class="card-title">${student.firstName} ${student.lastName}</h3>
                         <h4 class="card-text">Id: ${student.id}</h4>
@@ -120,4 +126,18 @@ let absentBtnClick = (studentId, absences) =>
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
     });
+}
+
+//Check for portrait
+let portraitExists = (fileName) => {
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', `http://127.0.0.1:5500/portraits/${fileName}`, false);
+    xhr.send();
+     
+    if (xhr.status == "404") {
+        return false;
+    } else {
+        return true;
+    }
+
 }
