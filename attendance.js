@@ -52,7 +52,10 @@ let readStudents = (students, selectedNganh) =>
                         <input type="file" class="form-control" id="${student.id}Upload" name="${student.id}" accept="image/*">
                         <button type="button" class="input-group-text" id="uploadImgBtn" onclick="uploadBtnClicked('${student.id.toString()}')">Upload</button>
                     </div>
-                    <div class="card-body">
+                    <div id="uploadingInProgress" class="mt-1 mb-0" hidden>
+                        <div class="alert alert-info">Uploading...</div>
+                    </div>
+                    <div class="card-body mt-0">
                         <h3 class="card-title">${student.firstName} ${student.lastName}</h3>
                         <h4 class="card-text">Id: ${student.id}</h4>
                         <p class="card-text">Nganh: <span style="float:right;">${student.nganh}, ${student.chidoan}</span></p>
@@ -153,30 +156,18 @@ let absentBtnClick = (studentId, absences) =>
     });
 }
 
-//Check for portrait
-let portraitExists = (fileName) => {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', `https://github.com/johndang118/johndang118.github.io/blob/main/portraits/${fileName}?raw=true`, false);
-    xhr.send();
-     
-    if (xhr.status != "200") {
-        return false;
-    } else {
-        return true;
-    }
-
-}
-
 
 let uploadBtnClicked = (studentid) =>
 {
     let fileInput = document.getElementById(`${studentid}Upload`);
     let selectedFile = fileInput.files[0];
     console.log(selectedFile)
-
+    
     if (selectedFile != undefined)
     {
-        handleUpload(selectedFile, fileInput.name);
+        document.getElementById("uploadingInProgress").removeAttribute("hidden");
+        setTimeout(handleUpload(selectedFile, fileInput.name), 200);
+        
     }
     else
     {
@@ -194,14 +185,17 @@ let handleUpload = (selectedFile, studentid) =>
     let studentPortraitsFolderRef = storageRef.child(`portraits/${studentid}.jpg`);
 
     studentPortraitsFolderRef.put(selectedFile).then((snapshot) => {
-        console.log('Uploaded Image: ', studentid);
+        console.log('Uploading Image: ', studentid);
         setTimeout(function(){
             getPortrait(studentid);
-        }, 5000);
-        alert("Image Uploaded");
-        document.getElementById("uploadImg").value = "";
-       
-    });
+        }, 100);
+
+        alert("Successfully uploaded");     
+        //document.getElementById("uploadImg").value = "";
+        document.getElementById("uploadingInProgress").setAttribute('hidden', 'hidden'); 
+    });    
+    
+    
 }
 
 let getPortrait = (studentid) =>
