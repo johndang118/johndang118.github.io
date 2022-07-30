@@ -42,10 +42,8 @@ let readStudents = (students, selectedNganh) =>
             card = 
             `<li id="${student.id.toString()}" class="list-unstyled col-sm-12 col-md-3 col-lg-3" style="margin:auto;">
                 <div class="card col-sm-12" style="margin-left:auto;">
-                    <picture style="margin-left:auto;text-align:center">
-                        <source alt="Special Days" srcset="${portraitFolderURL}placeholderimg.jpg?raw=true">
-                        <source alt="Special Days" srcset="${portraitFolderURL}placeholderimg.png?raw=true">                  
-                        <img src="${portraitFolderURL}placeholderimg.jpg?raw=true" class="card-img-top mx-0=auto" alt="picture of ${student.firstName}" style="min-width:60%; max-width:60%; max-height: 500px; margin-left: auto; margin-top:10px;  overflow:hidden; border-width: 4px; border-style: solid; border-radius:50%; border-color: ${portraitBorderColor};">
+                    <picture style="margin-left:auto;text-align:center">           
+                        <img id="${student.id}IMG" class="card-img-top mx-0=auto" alt="picture of ${student.firstName}" style="min-width:60%; max-width:60%; max-height: 500px; margin-left: auto; margin-top:10px;  overflow:hidden; border-width: 4px; border-style: solid; border-radius:50%; border-color: ${portraitBorderColor};">
                     </picture> 
                     <div class="input-group mt-2">
                         <input type="file" class="form-control" id="${student.id}Upload" name="${student.id}" accept="image/*">
@@ -73,6 +71,11 @@ let readStudents = (students, selectedNganh) =>
             </li>`
             
             document.getElementById('listOfStudents').innerHTML += card;
+            
+            setTimeout(function(){
+                getPortrait(student.id);
+            }, 1000);
+           
             
         }
     })
@@ -189,7 +192,51 @@ let handleUpload = (selectedFile, studentid) =>
 
     studentPortraitsFolderRef.put(selectedFile).then((snapshot) => {
         console.log('Uploaded Image: ', studentid);
-
+        setTimeout(function(){
+            getPortrait(studentid);
+        }, 5000);
+        alert("Image Uploaded");
         document.getElementById("uploadImg").value = "";
+       
     });
+}
+
+let getPortrait = (studentid) =>
+{
+
+    let storageRef = storage.ref();
+
+    let studentPortraitRef = storageRef.child(`portraits/${studentid}.jpg`);
+
+    studentPortraitRef.getDownloadURL()
+    .then((url) => {
+        console.log("image found for: ", studentid);
+        console.log(url.toString());
+        document.getElementById(`${studentid}IMG`).setAttribute("src", url.toString());              
+
+    })
+    .catch((error) => {
+        
+        switch (error.code) {
+            case 'storage/object-not-found':
+                console.log("no image found");
+                document.getElementById(`${studentid}IMG`).setAttribute("src", 'https://firebasestorage.googleapis.com/v0/b/tntthdfroster.appspot.com/o/portraits%2Fplaceholderimg.jpg?alt=media&token=13c39dc3-ab16-4881-aeb5-89fbf673b14a'); 
+                break;
+            case 'storage/unauthorized':
+
+              break;
+            case 'storage/canceled':
+
+              break;
+
+            case 'storage/unknown':
+
+              break;
+          }
+
+          
+    });
+
+
+    //return (imgUrl != '') ? imgUrl : 'https://firebasestorage.googleapis.com/v0/b/tntthdfroster.appspot.com/o/portraits%2Fplaceholderimg.jpg?alt=media&token=13c39dc3-ab16-4881-aeb5-89fbf673b14a';
 }
