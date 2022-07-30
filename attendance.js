@@ -42,10 +42,13 @@ let readStudents = (students, selectedNganh) =>
             card = 
             `<li id="${student.id.toString()}" class="list-unstyled col-sm-12 col-md-3 col-lg-3" style="margin:auto;">
                 <div class="card col-sm-12" style="margin-left:auto;">
-                    <picture style="margin-left:auto;text-align:center">           
-                        <img id="${student.id}IMG" class="card-img-top mx-0=auto" alt="picture of ${student.firstName}" style="min-width:60%; max-width:60%; max-height: 500px; margin-left: auto; margin-top:10px;  overflow:hidden; border-width: 4px; border-style: solid; border-radius:50%; border-color: ${portraitBorderColor};">
-                    </picture> 
-                    <div class="input-group mt-2">
+
+                    <div class="col-10 mx-auto mb-4" style="height:210px;">
+                        <picture class="col-12 mx-auto" style="">           
+                            <img id="${student.id}IMG" class="card-img-top" alt="picture of ${student.firstName}" style="height:100%;margin-left: auto; margin-top:10px;  overflow:hidden; border-width: 4px; border-style: solid; border-radius:50%; border-color: ${portraitBorderColor};">
+                        </picture> 
+                    </div>
+                    <div class="input-group mt-0">
                         <input type="file" class="form-control" id="${student.id}Upload" name="${student.id}" accept="image/*">
                         <button type="button" class="input-group-text" id="uploadImgBtn" onclick="uploadBtnClicked('${student.id.toString()}')">Upload</button>
                     </div>
