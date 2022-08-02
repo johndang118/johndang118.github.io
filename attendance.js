@@ -52,7 +52,7 @@ let readStudents = (students, selectedNganh) =>
                         <input type="file" class="form-control" id="${student.id}Upload" name="${student.id}" accept="image/*">
                         <button type="button" class="input-group-text" id="uploadImgBtn" onclick="uploadBtnClicked('${student.id.toString()}')">Upload</button>
                     </div>
-                    <div id="uploadingInProgress" class="mt-1 mb-0" hidden>
+                    <div id="${student.id}uploadingInProgress" class="mt-1 mb-0" hidden>
                         <div class="alert alert-info">Uploading...</div>
                     </div>
                     <div class="card-body mt-0">
@@ -165,8 +165,8 @@ let uploadBtnClicked = (studentid) =>
     
     if (selectedFile != undefined)
     {
-        document.getElementById("uploadingInProgress").removeAttribute("hidden");
-        setTimeout(handleUpload(selectedFile, fileInput.name), 200);
+        document.getElementById(`${studentid}uploadingInProgress`).removeAttribute("hidden");
+        setTimeout(handleUpload(selectedFile, fileInput.name), 10);
         
     }
     else
@@ -192,7 +192,7 @@ let handleUpload = (selectedFile, studentid) =>
 
         alert("Successfully uploaded");     
         //document.getElementById("uploadImg").value = "";
-        document.getElementById("uploadingInProgress").setAttribute('hidden', 'hidden'); 
+        document.getElementById(`${studentid}uploadingInProgress`).setAttribute('hidden', 'hidden'); 
     });    
     
     
