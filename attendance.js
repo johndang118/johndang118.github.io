@@ -166,7 +166,7 @@ let uploadBtnClicked = (studentid) =>
     if (selectedFile != undefined)
     {
         document.getElementById(`${studentid}uploadingInProgress`).removeAttribute("hidden");
-        setTimeout(handleUpload(selectedFile, fileInput.name), 10);
+        setTimeout(handleUpload(selectedFile, fileInput.name), 1000);
         
     }
     else
