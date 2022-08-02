@@ -62,12 +62,12 @@ let readStudents = (students, selectedNganh) =>
                         
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Guardian: <span style="float:right;">${student.fatherName}</span></li>
-                        <li class="list-group-item">Email: <span style="float:right;">${student.fatherEmail}</span></li>
-                        <li class="list-group-item">Phone: <span style="float:right;">${student.fatherPhone}</span></li>
+                        <li class="list-group-item">Father Email: <span style="float:right;">${student.fatherEmail}</span></li>
+                        <li class="list-group-item">Father Phone: <span style="float:right;">${student.fatherPhone}</span></li>
+                        <li class="list-group-item">Mother Email: <span style="float:right;">${student.fatherEmail}</span></li>
+                        <li class="list-group-item">Mother Phone: <span style="float:right;">${student.fatherPhone}</span></li>
                         <li class="list-group-item">Notes: <span style="float:right;">${student.notes}</span></li>
-                        <li class="list-group-item">Birthdate: <span style="float:right;">${student.dateOfBirth}</span></li>
-                        <li class="list-group-item">Total Absences: <span style="float:right;">${student.absences}</span></li>
+                        <li class="list-group-item">Birthdate: <span style="float:right;">${student.dateOfBirth} ${isBirthday(student.dateOfBirth)}</span></li>
                     </ul>
                     <div class="card-body">
                         <button class="btn btn-primary col-5 ms-auto px-0" onclick="presentBtnClick('${student.id.toString()}')">Present</button>
@@ -86,6 +86,25 @@ let readStudents = (students, selectedNganh) =>
         }
     })
 
+}
+
+let addDays = (days) =>
+{
+    let date = new Date();
+
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
+let isBirthday = (dateOfBirth) =>
+{
+    let bdayformatted = new Date(dateOfBirth);
+
+    let currentDatePlus = addDays(6);
+
+    let currentDateMinus = addDays(-6);
+
+    return (bdayformatted <= currentDatePlus) && (bdayformatted >= currentDateMinus) ? ' (<b style="color:green">Birthday Week!</b>)' : '';
 }
 
 let returnCurrentDateString = () =>
@@ -125,6 +144,7 @@ let absentBtnClick = (studentId, absences) =>
 
     var studentRef = db.collection("students").doc(studentId).collection("Attendance").doc(returnCurrentDateString());
 
+    /*
     let studentDocRef = db.collection("students");
 
     studentDocRef.doc(studentId).set({
@@ -139,7 +159,7 @@ let absentBtnClick = (studentId, absences) =>
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
     });
-
+    */
     return studentRef.set({
         present: false
     }, {merge : true})
