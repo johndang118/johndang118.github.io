@@ -38,10 +38,9 @@ let readStudents = (students, selectedNganh) =>
                 default: portraitBorderColor = 'red'
             }
 
-            const portraitFolderURL = 'https://github.com/johndang118/johndang118.github.io/blob/main/portraits/';
             card = 
             `<li id="${student.id.toString()}" class="list-unstyled col-sm-12 col-md-3 col-lg-3" style="margin:auto;">
-                <div class="card col-sm-12" style="margin-left:auto;">
+                <div class="shadow-lg card p-3 bg-body col-sm-12 rounded" style="margin-left:auto;">
 
                     <div class="col-10 mx-auto mb-4" style="height:210px;">
                         <picture class="col-12 mx-auto" style="">           
