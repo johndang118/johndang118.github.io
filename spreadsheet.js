@@ -14,18 +14,24 @@ let displayStudents = (students) =>
 
 //display date headers
 let studentdata = "";
+let listheader = "<tr><th>Name</th><th>Birthdate</th><th>Nganh</th><th>Cap</th>";
 
 let sundayDates = getSundays();
 sundayDates.forEach((sunday) => {
-    document.getElementById("studenttableheader").innerHTML += `<th>${sunday.toLocaleDateString()}</th>`;
+   listheader += `<th>${sunday.toLocaleDateString()}</th>` 
 });
+
+listheader += '</tr>';
+document.getElementById("studenttableheader").innerHTML = listheader;
 
 students.forEach((student) => {  
 
     studentdata = 
     `<tr id="${student.id}Data">
         <td>${student.firstName} ${student.lastName}</td>
-        <td>${student.dateOfBirth}`;
+        <td>${student.dateOfBirth}</td>
+        <td>${student.nganh}</td>
+        <td>${student.chidoan}</td>`;
 
     db.collection("students").doc(student.id).collection("Attendance").get().then((querySnapshot) => {
         let attendanceDates = [];
@@ -37,7 +43,7 @@ students.forEach((student) => {
         });
 
         let sortedAttendanceDates = attendanceDates.sort((a, b) => new Date(b.id) < new Date(a.id) ? 1: -1);
-
+        let sundayDates = getSundays();
         sundayDates.forEach((sunday) => {
                 sortedAttendanceDates.forEach((date) => {
                 console.log(new Date(date.id).toLocaleDateString());
@@ -45,6 +51,7 @@ students.forEach((student) => {
                 if(new Date(date.id).toLocaleDateString() == new Date(sunday).toLocaleDateString()){
                     document.getElementById(`${student.id}Data`).innerHTML += `<td>${date.present ? "Present" : "Absent"}</td>`;
                 }
+
             });
 
             
@@ -57,8 +64,8 @@ students.forEach((student) => {
     studentdata += '</tr>';
 
     console.log(studentdata);
-    document.getElementById('studenttable').innerHTML += studentdata;
-    
+    document.getElementById('studenttablebody').innerHTML += studentdata;
+    reloadCss();
 });
 
 }
@@ -90,3 +97,15 @@ let getSundays = () =>
  
 }
 
+var links = document.getElementsByTagName("link");
+
+function reloadCss()
+{
+    var links = document.getElementsByTagName("link");
+    for (var cl in links)
+    {
+        var link = links[cl];
+        if (link.rel === "stylesheet")
+            link.href += "";
+    }
+}

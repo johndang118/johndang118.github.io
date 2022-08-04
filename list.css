@@ -19,6 +19,7 @@ body
 }
 nav
 {
+    display:inline-block;
     position: sticky;
     top: 0;
     bottom: 0;
@@ -99,20 +100,23 @@ a:hover i
 
 .container
 {
-    display: flex;
+    display:flex;
 }
 
 .attendance
 {
     margin-top: 20px;
+    margin-left: 10px;
     text-transform: capitalize;
+    flex-grow: 3;
+    width:90%;
+    position:relative;
 }
 
 /* List */
 
 .attendance-list
 {
-    width:100%;
     padding:10px;
     margin-top:10px;
     margin-left: 15px;
@@ -126,7 +130,6 @@ a:hover i
     border-collapse:collapse;
     margin:25px 0;
     font-size:15px;
-    min-width:100%;
     overflow:hidden;
     border-radius:5px 5px;
 }
