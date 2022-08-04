@@ -19,7 +19,6 @@ body
 }
 nav
 {
-    display:inline-block;
     position: sticky;
     top: 0;
     bottom: 0;
@@ -108,15 +107,15 @@ a:hover i
     margin-top: 20px;
     margin-left: 10px;
     text-transform: capitalize;
-    flex-grow: 3;
-    width:90%;
-    position:relative;
+    width:0;
+
 }
 
 /* List */
 
 .attendance-list
 {
+    width:4100px;
     padding:10px;
     margin-top:10px;
     margin-left: 15px;
