@@ -73,7 +73,8 @@ students.forEach((student) => {
 let getSundays = () =>
 {       
     let sundays = []
-    let currentYear = 2022;
+    
+    let currentYear = 2022; //change this line to current year every year
     let startDate = new Date(currentYear, 8, 1);
     let endDate = new Date(currentYear+1, 6, 1);
     
