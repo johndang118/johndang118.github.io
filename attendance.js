@@ -42,9 +42,9 @@ let readStudents = (students, selectedNganh) =>
             `<li id="${student.id.toString()}" class="list-unstyled col-sm-12 col-md-3 col-lg-3" style="margin:auto;">
                 <div class="shadow-lg card p-3 bg-body col-sm-12 rounded" style="margin-left:auto;">
 
-                    <div class="col-10 mx-auto mb-4" style="height:210px;">
+                    <div class="col-10 mx-auto mb-4" style="height:275px;width:275px">
                         <picture class="col-12 mx-auto" style="">           
-                            <img id="${student.id}IMG" class="card-img-top" alt="picture of ${student.firstName}" style="height:100%;margin-left: auto; margin-top:10px;  overflow:hidden; border-width: 4px; border-style: solid; border-radius:50%; border-color: ${portraitBorderColor};">
+                            <img id="${student.id}IMG" class="card-img-top" alt="picture of ${student.firstName}" style="height:100%;margin-left: auto; margin-top:10px;  overflow:hidden; border-width: 4px; border-style: solid; border-radius: 5%; border-color: ${portraitBorderColor};">
                         </picture> 
                     </div>
                     <div class="input-group mt-0">
