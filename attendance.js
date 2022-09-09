@@ -63,8 +63,8 @@ let readStudents = (students, selectedNganh) =>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Father Email: <span style="float:right;">${student.fatherEmail}</span></li>
                         <li class="list-group-item">Father Phone: <span style="float:right;">${student.fatherPhone}</span></li>
-                        <li class="list-group-item">Mother Email: <span style="float:right;">${student.fatherEmail}</span></li>
-                        <li class="list-group-item">Mother Phone: <span style="float:right;">${student.fatherPhone}</span></li>
+                        <li class="list-group-item">Mother Email: <span style="float:right;">${student.motherEmail}</span></li>
+                        <li class="list-group-item">Mother Phone: <span style="float:right;">${student.motherPhone}</span></li>
                         <li class="list-group-item">Notes: <span style="float:right;">${student.notes}</span></li>
                         <li class="list-group-item">Birthdate: <span style="float:right;">${student.dateOfBirth} ${isBirthday(student.dateOfBirth)}</span></li>
                     </ul>
