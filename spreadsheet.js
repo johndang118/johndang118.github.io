@@ -49,7 +49,7 @@ students.forEach((student) => {
                 console.log(new Date(date.id).toLocaleDateString());
                 console.log(new Date(sunday).toLocaleDateString());
                 if(new Date(date.id).toLocaleDateString() == new Date(sunday).toLocaleDateString()){
-                    document.getElementById(`${student.id}Data`).innerHTML += `<td>${date.present ? "Present" : "Absent"}</td>`;
+                    document.getElementById(`${student.id}Data`).innerHTML += `<td>${date.present ? "Present" : "Absent"}, ${date.attendance.attendanceby}</td>`;
                 }
 
             });

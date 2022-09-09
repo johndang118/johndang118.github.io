@@ -123,7 +123,8 @@ let presentBtnClick = (studentId) =>
     var studentRef = db.collection("students").doc(studentId).collection("Attendance").doc(returnCurrentDateString());
 
     return studentRef.set({
-        present: true
+        present: true,
+        attendanceby: document.getElementById("attendanceby").value
     }, {merge : true})
     .then(() => {
         console.log("Document successfully updated!");
@@ -160,7 +161,8 @@ let absentBtnClick = (studentId, absences) =>
     });
     */
     return studentRef.set({
-        present: false
+        present: false,
+        attendanceby: document.getElementById("attendanceby").value
     }, {merge : true})
     .then(() => {
 
