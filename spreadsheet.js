@@ -73,9 +73,9 @@ students.forEach((student) => {
 let getSundays = () =>
 {       
     let sundays = []
-
-    let startDate = new Date(new Date().getFullYear(), 8, 1);
-    let endDate = new Date(new Date().getFullYear()+1, 6, 1);
+    let currentYear = 2022;
+    let startDate = new Date(currentYear, 8, 1);
+    let endDate = new Date(currentYear+1, 6, 1);
     
     while(startDate.getDay() != 0)
     {
