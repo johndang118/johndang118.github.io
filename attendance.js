@@ -56,7 +56,6 @@ let readStudents = (students, selectedNganh) =>
                     </div>
                     <div class="card-body mt-0">
                         <h3 class="card-title">${student.firstName} ${student.lastName}</h3>
-                        <h4 class="card-text">Id: ${student.id}</h4>
                         <p class="card-text">Nganh: <span style="float:right;">${student.nganh}, ${student.chidoan}</span></p>
                         
                     </div>
