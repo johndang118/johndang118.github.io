@@ -49,7 +49,7 @@ students.forEach((student) => {
                 console.log(new Date(date.id).toLocaleDateString());
                 console.log(new Date(sunday).toLocaleDateString());
                 if(new Date(date.id).toLocaleDateString() == new Date(sunday).toLocaleDateString()){
-                    document.getElementById(`${student.id}Data`).innerHTML += `<td>${date.present ? "Present" : "Absent"}, ${date.attendance.attendanceby}</td>`;
+                    document.getElementById(`${student.id}Data`).innerHTML += `<td>${date.present ? "Present" : "Absent"}</td>`;
                 }
 
             });
@@ -75,7 +75,7 @@ let getSundays = () =>
     let sundays = []
     
     let currentYear = 2022; //change this line to current year every year
-    let startDate = new Date(currentYear, 8, 1);
+    let startDate = new Date(currentYear, 8, 25);
     let endDate = new Date(currentYear+1, 6, 1);
     
     while(startDate.getDay() != 0)
