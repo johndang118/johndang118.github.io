@@ -11,6 +11,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <script src="./firebase.js"></script>
   <script src="./spreadsheet.js"></script>
+  <script src="./filter.js"></script>
   <title>HDF Attendance</title>
   <!-- Font Awesome Cdn Link -->
   <script src="https://kit.fontawesome.com/b360b00905.js" crossorigin="anonymous"></script>
@@ -48,6 +49,13 @@
         </nav>
         
 
+      <div>
+        <section class="attendance">
+          <div class="search">
+            <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search By Name/Nganh" title="Please type Name/Nganh">
+          </div>  
+        </section> 
+
           <section class="attendance">
             <div class="attendance-list">
                <h1>Attendance List</h1>
@@ -59,7 +67,7 @@
                 </table>
             </div>
           </section>
-
+      </div>
     </div>
     
 </body>
