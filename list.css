@@ -167,6 +167,35 @@ a:hover i
 {
     border-bottom: 2px solid #4AD489;
 }
+
+  /* Filter search bar */
+
+input[type=text]
+{
+    width: 150px;
+    height: 30px;
+    font-size: 15px;
+    text-align: center;
+    padding:10px;
+    box-shadow: 0 0 1px 1px;
+    border-radius: 5px;
+}
+
+.search
+{
+    padding-left: 15px;
+}
+
+.filter
+{
+    padding-left:15px;
+    padding-bottom: 15px;
+}
+
+
+
+
+
 /* Dropdown Button */
 .dropbtn {
     background-color: #04AA6D;
