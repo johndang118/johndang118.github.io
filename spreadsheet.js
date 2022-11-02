@@ -37,24 +37,31 @@ students.forEach((student) => {
         let attendanceDates = [];
         querySnapshot.forEach((attendanceDate) => {
             attendanceDates.push({
-                id: attendanceDate.id,
+                studentid: student.id,
+                date: attendanceDate.id,
                 ...attendanceDate.data()
             });    
         });
 
-        let sortedAttendanceDates = attendanceDates.sort((a, b) => new Date(b.id) < new Date(a.id) ? 1: -1);
+        //let sortedAttendanceDates = attendanceDates.sort((a, b) => new Date(b.id) < new Date(a.id) ? 1: -1);
+        let sortedAttendanceDates = attendanceDates.sort((a, b) => new Date(b.date) < new Date(a.date) ? 1: -1);
         let sundayDates = getSundays();
         sundayDates.forEach((sunday) => {
-                sortedAttendanceDates.forEach((date) => {
-                console.log(new Date(date.id).toLocaleDateString());
-                console.log(new Date(sunday).toLocaleDateString());
-                if(new Date(date.id).toLocaleDateString() == new Date(sunday).toLocaleDateString()){
-                    document.getElementById(`${student.id}Data`).innerHTML += `<td>${date.present ? "Present" : "Absent"}</td>`;
+            console.log( sortedAttendanceDates);
+            let addEmptyCell = true
+            sortedAttendanceDates.forEach((date) => {
+                if(new Date(date.date).toLocaleDateString() == new Date(sunday).toLocaleDateString()){
+                    document.getElementById(`${student.id}Data`).innerHTML += `<td name="${student.id}">${date.present ? "Present" : "Absent"}</td>`;
+                    console.log('Added: ' + date.studentid + ' ' + new Date(date.date).toLocaleDateString() + ' || Sunday: ' + new Date(sunday).toLocaleDateString());
+                    addEmptyCell = false
                 }
-
             });
-
-            
+           
+            if(addEmptyCell)
+            {
+                document.getElementById(`${student.id}Data`).innerHTML += `<td name="${student.id}"></td>`;
+            }
+           // document.getElementById(`${student.id}Data`).innerHTML += `<td name="${student.id}">X</td>`;
         });
 
         
