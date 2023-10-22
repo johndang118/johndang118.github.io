@@ -1,97 +1,51 @@
-function registerStudent()
-{
-    let firstName = document.getElementById("firstName").value;
-    let middleName = document.getElementById("middleName").value;
-    let lastName = document.getElementById("lastName").value;
-    let dateOfBirth = document.getElementById("dateOfBirth").value;
-    let nganh = document.getElementById("nganh").value;
-    let chidoan = document.getElementById("chidoan").value;
-    let gender = document.getElementById("gender").value;
-    let fatherName = document.getElementById("fatherName").value;
-    let fatherPhone = document.getElementById("fatherPhone").value;
-    let fatherEmail = document.getElementById("fatherEmail").value;
-    let motherName = document.getElementById("motherName").value;
-    let motherPhone = document.getElementById("motherPhone").value;
-    let motherEmail = document.getElementById("motherEmail").value;
-    let address = document.getElementById("address").value;
-    let returningNew = document.getElementById("returningNew").value;
-    let paid = document.getElementById("paid").value;
-    let notes = document.getElementById("notes").value;
+//Read
+let readQuestion = () => {
+    let questions = db.collection("Questions").doc(document.getElementById("question").getAttribute('name'));
 
-    addStudent(firstName, middleName, lastName, dateOfBirth, chidoan, nganh, gender, fatherName, fatherPhone, fatherEmail, motherName, motherPhone, motherEmail, address, returningNew, paid, notes);
-
-    //clear field values
-    document.getElementById("firstName").value = '';
-    document.getElementById("middleName").value = '';
-    document.getElementById("lastName").value = '';
-    document.getElementById("dateOfBirth").value = '';
-    document.getElementById("nganh").value = '';
-    document.getElementById("chidoan").value = '';
-    document.getElementById("gender").value = '';
-    document.getElementById("fatherName").value = '';
-    document.getElementById("fatherPhone").value = '';
-    document.getElementById("fatherEmail").value = '';
-    document.getElementById("motherName").value = '';
-    document.getElementById("motherPhone").value = '';
-    document.getElementById("motherEmail").value = '';
-    document.getElementById("address").value = '';
-    document.getElementById("returningNew").value = '';
-    document.getElementById("paid").value = '';
-    document.getElementById("notes").value = '';
-}
-
-function addStudent(firstName, middleName, lastName, dateOfBirth, chidoan, nganh, gender, fatherName, fatherPhone, fatherEmail, motherName, motherPhone, motherEmail, address, returningNew, paid, notes)
-{
-    let id = studentId(firstName, lastName, fatherPhone, motherPhone);
-
-    let studentDocRef = db.collection("students").doc(id);
-
-    studentDocRef.set({
-        id: id,
-        firstName: firstName,
-        middleName: middleName,
-        lastName: lastName,
-        dateOfBirth: dateOfBirth,
-        chidoan: chidoan,
-        nganh: nganh,
-        gender: gender,
-        fatherName: fatherName,
-        fatherPhone: fatherPhone,
-        fatherEmail: fatherEmail,
-        motherName: motherName,
-        motherPhone: motherPhone,
-        motherEmail: motherEmail,
-        address: address,
-        returningNew: returningNew,
-        paid: paid,
-        notes: notes
-    })
-    .then((docRef) => {
-        alert("Successfully Registered Student with Id: " + id);
-        console.log("Student added with ID: ", id);
-    })
-    .catch((error) => {
-        alert("Could not register. Contact JD");
-        console.error("Error adding student: ", error);
-    });
-
-    
-}
-
-let studentId = (firstName, lastName, fatherPhone, motherPhone) =>
-{
-    let studentId;
-    if (fatherPhone.length >= 4) {
-        studentId = lastName.toLowerCase()+firstName.toLowerCase()+fatherPhone.slice(-4);
-    }
-    else if (motherPhone.length >= 4)
+    questions.get().then(doc => {
+    if (doc.exists && !doc.data().claimed)
     {
-        studentId = lastName.toLowerCase()+firstName.toLowerCase()+motherPhone.slice(-4);
+        document.getElementById('question').innerHTML = '<h1>' + doc.data().question + '</h1>';
+        console.log(doc.data().question);
     }
     else
     {
-        studentId = lastName.toLowerCase()+firstName.toLowerCase()+Math.trunc(Math.random() * 10000);
+        document.getElementById('question').innerHTML = '<h1>This question has been claimed by Team ' + doc.data().claimedby + '</h1>';
     }
-
-    return studentId;
+    })
+    .catch(error => console.log("error getting doc", error));
 }
+
+//Update
+let claimQuestion = () => {
+    if (document.getElementById("TeamName").value.trim().length < 1)
+    {
+        document.getElementById('question').innerHTML = '<div class="alert alert-danger">Must Enter Team Name</div>';
+        alert("Missing Team Name");
+    }
+    else
+    {
+        let questionRef = db.collection("Questions").doc(document.getElementById("question").getAttribute('name'));
+
+        questionRef.get().then(doc => {
+            if (doc.exists && !doc.data().claimed)
+            {
+                questionRef.update({claimed: true, claimedby: document.getElementById("TeamName").value})
+                .then(() => {
+                    readQuestion();
+                    alert("You have successfully claimed this question!");
+                })
+                .catch(error => {console.error("Error Updating Data: ", error);})
+            }
+            else
+            {
+                alert("Question's already claimed");
+                readQuestion();
+            }
+        })
+        .catch(error => console.log("error getting doc", error));
+    }
+};
+
+//Load Question on Page Load
+window.onload = readQuestion();
