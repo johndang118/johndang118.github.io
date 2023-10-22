@@ -6,6 +6,7 @@ let readQuestion = () => {
     if (doc.exists && !doc.data().claimed)
     {
         document.getElementById('question').innerHTML = '<h1>' + doc.data().question + '</h1>';
+        document.getElementById('task').innerHTML = '<h2>Task: ' + doc.data().task + '</h2>';
         console.log(doc.data().question);
     }
     else
