@@ -12,6 +12,7 @@ let readQuestion = () => {
     else
     {
         document.getElementById('question').innerHTML = '<h1>This question has been claimed by Team ' + doc.data().claimedby + '</h1>';
+        document.getElementById('task').innerHTML = '';
     }
     })
     .catch(error => console.log("error getting doc", error));
